@@ -1,0 +1,346 @@
+﻿<Window x:Class="WPF_Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Calculator"
+        mc:Ignorable="d"
+        
+        x:Name="WPF_Calculator"
+        Title="WPF Calculator"
+        Height="300"
+        Width="250"
+        
+        WindowStartupLocation="CenterScreen"
+        TextOptions.TextFormattingMode="Display">
+    <WindowChrome.WindowChrome>
+        <WindowChrome UseAeroCaptionButtons="False" CaptionHeight="0" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="24" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Background="Transparent"
+                BorderBrush="Silver"
+                BorderThickness="0,0,0,1"
+                MouseLeftButtonDown="DragWindow">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="30" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="WPF Calculator"
+                           FontFamily="Segoe UI"
+                           FontSize="12"
+                           VerticalAlignment="Center"
+                           Margin="8,1,0,0"/>
+
+                <Button Grid.Column="1"
+                        Cursor="Hand"
+                        Focusable="False"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ToolTip="Minimize"
+                        PreviewMouseLeftButtonDown="MinimizeWindow">
+                    <Button.Content>
+                        <Line X2="10" Y1="4" Y2="4"
+                              Stroke="Black" StrokeThickness="1"/>
+                    </Button.Content>
+                </Button>
+
+                <Button Grid.Column="2"
+                        Cursor="Hand"
+                        Focusable="False"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ToolTip="Close"
+                        PreviewMouseLeftButtonDown="CloseWindow">
+                    <Button.Content>
+                        <Grid>
+                            <Line X2="10" Y1="3" Y2="13"
+                                  Stroke="Black" StrokeThickness="1"/>
+                            <Line X2="10" Y1="13" Y2="3"
+                                  Stroke="Black" StrokeThickness="1"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </Border>
+
+        <TextBlock x:Name="GivenMath"
+                   Text="0"
+                   Grid.Row="1"
+                   Margin="4"
+                   Padding="4,2"
+                   FontFamily="Consolas"
+                   FontSize="11"
+                   VerticalAlignment="Center"
+                   Background="Gainsboro"/>
+
+        <TextBlock x:Name="CalculatedMath"
+                   Text="0"
+                   Grid.Row="2"
+                   Margin="4"
+                   Padding="4,2"
+                   FontFamily="Consolas"
+                   FontSize="11"
+                   VerticalAlignment="Center"
+                   Background="Gainsboro"/>
+
+        <Grid Grid.Row="3"
+              Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="CE"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="ClearCalculator"/>
+
+            <Button Content="C"
+                    Grid.Column="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="ClearGivenNumber"/>
+
+            <Button Content="(-)"
+                    Grid.Column="2"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetOppositeSymbol"/>
+        </Grid>
+
+        <Grid Grid.Row="4"
+              Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="/"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetOperator"/>
+
+            <Button Content="*"
+                    Grid.Column="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetOperator"/>
+
+            <Button Content="-"
+                    Grid.Column="2"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetOperator"/>
+
+            <Button Content="+"
+                    Grid.Column="3"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetOperator"/>
+        </Grid>
+
+        <Grid Grid.Row="5"
+              Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="7"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="8"
+                    Grid.Column="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="9"
+                    Grid.Column="2"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="(.)"
+                    Grid.Column="3"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="SetDecimal"/>
+        </Grid>
+
+        <Grid Grid.Row="6"
+              Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="4"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="5"
+                    Grid.Column="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="6"
+                    Grid.Column="2"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="&lt;-"
+                    Grid.Column="3"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="RemoveLastDigit"/>
+        </Grid>
+
+        <Grid Grid.Row="7"
+              Margin="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="2"
+                    Grid.Column="1"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="3"
+                    Grid.Column="2"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="AddNumber"/>
+
+            <Button Content="="
+                    Grid.Column="3"
+                    FontFamily="Consolas"
+                    FontSize="12"
+                    Cursor="Hand"
+                    Focusable="False"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    PreviewMouseLeftButtonDown="Calculate"/>
+        </Grid>
+
+        <Button Content="0"
+                Grid.Row="8"
+                Margin="6"
+                FontFamily="Consolas"
+                FontSize="12"
+                Cursor="Hand"
+                Focusable="False"
+                Background="Transparent"
+                BorderThickness="0"
+                PreviewMouseLeftButtonDown="AddNumber"/>
+    </Grid>
+</Window>
